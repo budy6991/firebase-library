@@ -1,30 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { DisplayBooks } from "./DisplayBooks";
 import { InputBook } from "./InputBook";
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import { collection, addDoc, query, getDocs, doc } from "firebase/firestore";
 import { db } from "../firebase/Firebase";
 
 export const Overview = () => {
   const [books, setBooks] = useState([]);
+  const booksCollectionRef = collection(db, "Books");
   const handleBooks = (book) => {
     setBooks(books.concat(book));
     try {
-      addDoc(collection(db, "Books"), {
-        book: book,
-      });
+      addDoc(collection(db, "Books"), book);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    const data = async () => {
-      try {
-      } catch (error) {
-        console.log(error);
-      }
+    const getBooks = async () => {
+      const data = await getDocs(booksCollectionRef);
+      setBooks(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
-    data();
+
+    getBooks();
+    console.log(books);
   }, []);
 
   return (

@@ -14,5 +14,7 @@ export const DisplayBooks = ({ books }) => {
       />
     );
   });
-  return <div className="flex gap-10 flex-wrap">{displayAll}</div>;
+  return (
+    <div className="flex gap-10 flex-wrap mt-[200px] p-5">{displayAll}</div>
+  );
 };
