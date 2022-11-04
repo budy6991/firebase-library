@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-export const InputBook = () => {
+export const InputBook = ({ addBook }) => {
   const [name, setName] = useState("");
   const [author, setAuthor] = useState("");
   const [pages, setPages] = useState("");
@@ -16,9 +16,21 @@ export const InputBook = () => {
   const handlePages = (e) => {
     setPages(e.target.value);
   };
+  const handleSubmit = (e) => {
+    let id = "id" + Math.random().toString(16).slice(2);
+    e.preventDefault();
+    setBook({
+      name: name,
+      author: author,
+      pages: pages,
+      read: isRead,
+      id: id,
+    });
+    addBook(book);
+  };
 
   return (
-    <div className="absolute left-[50%]  translate-x-[-50%] top-5 items-center bg-red-300 rounded-lg bg-zinc-800">
+    <div className="absolute left-[50%]  translate-x-[-50%] top-5 items-center rounded-lg bg-zinc-800">
       <form>
         <div className="flex flex-col items-center gap-3 p-3 ">
           <div>
@@ -37,9 +49,8 @@ export const InputBook = () => {
           </div>
           <div className="flex gap-7 text-white ">
             <button className="bg-white rounded-full p-1 text-black hover:text-white hover:bg-black">
-              Read
+              Add
             </button>
-            <button className="bg-red-700 rounded-full p-1">Remove</button>
           </div>
         </div>
       </form>
