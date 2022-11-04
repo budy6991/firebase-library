@@ -47,7 +47,7 @@ export const InputBook = ({ addBook }) => {
           </div>
           <div className="flex gap-7 text-white ">
             <button
-              className="bg-white rounded-full p-1 text-black hover:text-white hover:bg-black"
+              className="bg-white rounded-lg p-1 text-black hover:text-white hover:bg-green-500"
               onClick={handleSubmit}
             >
               Add

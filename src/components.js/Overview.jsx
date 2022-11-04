@@ -1,18 +1,36 @@
 import React, { useState, useEffect } from "react";
 import { DisplayBooks } from "./DisplayBooks";
 import { InputBook } from "./InputBook";
-import { collection, addDoc, query, getDocs, doc } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  query,
+  getDocs,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "../firebase/Firebase";
 
 export const Overview = () => {
   const [books, setBooks] = useState([]);
   const booksCollectionRef = collection(db, "Books");
-  const handleBooks = (book) => {
+  const handleBooks = async (book) => {
     setBooks(books.concat(book));
     try {
       addDoc(collection(db, "Books"), book);
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const markAsRead = async (id, read) => {
+    try {
+      const booksDoc = doc(db, "Books", id);
+      await updateDoc(booksDoc, { read });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      console.log("Updated");
     }
   };
 
@@ -23,13 +41,12 @@ export const Overview = () => {
     };
 
     getBooks();
-    console.log(books);
   }, []);
 
   return (
     <div className="relative w-full h-full">
       <InputBook addBook={handleBooks} />
-      <DisplayBooks books={books} />
+      <DisplayBooks books={books} markAsRead={markAsRead} />
     </div>
   );
 };
