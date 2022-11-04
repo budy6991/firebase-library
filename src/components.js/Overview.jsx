@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { DisplayBooks } from "./DisplayBooks";
 import { InputBook } from "./InputBook";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs } from "firebase/firestore";
 import { db } from "../firebase/Firebase";
 
 export const Overview = () => {
@@ -17,7 +17,15 @@ export const Overview = () => {
     }
   };
 
-  useEffect(() => {}, [books]);
+  useEffect(() => {
+    const data = async () => {
+      try {
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    data();
+  }, []);
 
   return (
     <div className="relative w-full h-full">
