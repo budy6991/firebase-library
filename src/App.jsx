@@ -7,8 +7,6 @@ import { InputBook } from "./components.js/InputBook";
 import { Overview } from "./components.js/Overview";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <div className="w-screen h-screen bg-gray-200 flex flex-col justify-between">
       <Header />

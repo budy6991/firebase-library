@@ -5,7 +5,6 @@ export const InputBook = ({ addBook }) => {
   const [author, setAuthor] = useState("");
   const [pages, setPages] = useState("");
   const [isRead, setIsRead] = useState(false);
-  const [book, setBook] = useState({});
 
   const handleName = (e) => {
     setName(e.target.value);
@@ -19,14 +18,13 @@ export const InputBook = ({ addBook }) => {
   const handleSubmit = (e) => {
     let id = "id" + Math.random().toString(16).slice(2);
     e.preventDefault();
-    setBook({
+    addBook({
       name: name,
       author: author,
       pages: pages,
       read: isRead,
-      id: id,
+      id,
     });
-    addBook(book);
   };
 
   return (
@@ -48,7 +46,10 @@ export const InputBook = ({ addBook }) => {
             <input type="number" placeholder="Pages" onChange={handlePages} />
           </div>
           <div className="flex gap-7 text-white ">
-            <button className="bg-white rounded-full p-1 text-black hover:text-white hover:bg-black">
+            <button
+              className="bg-white rounded-full p-1 text-black hover:text-white hover:bg-black"
+              onClick={handleSubmit}
+            >
               Add
             </button>
           </div>
