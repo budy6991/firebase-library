@@ -8,6 +8,8 @@ import {
   getDocs,
   doc,
   updateDoc,
+  deleteDoc,
+  onSnapshot,
 } from "firebase/firestore";
 import { db } from "../firebase/Firebase";
 
@@ -34,6 +36,18 @@ export const Overview = () => {
     }
   };
 
+  const deleteBook = async (id) => {
+    try {
+      const booksDoc = doc(db, "Books", id);
+      await deleteDoc(booksDoc);
+      refreshLibrary();
+    } catch (error) {
+      console.log("Error");
+    } finally {
+      console.log("Updated");
+    }
+  };
+
   useEffect(() => {
     const getBooks = async () => {
       const data = await getDocs(booksCollectionRef);
@@ -43,10 +57,25 @@ export const Overview = () => {
     getBooks();
   }, []);
 
+  useEffect(() => {
+    onSnapshot(booksCollectionRef, (snapshot) =>
+      setBooks(
+        snapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }))
+      )
+    );
+  }, []);
+
   return (
-    <div className="relative w-full h-full">
+    <div className="relative w-screen h-full overflow-x-hidden">
       <InputBook addBook={handleBooks} />
-      <DisplayBooks books={books} markAsRead={markAsRead} />
+      <DisplayBooks
+        books={books}
+        markAsRead={markAsRead}
+        deleteBook={deleteBook}
+      />
     </div>
   );
 };

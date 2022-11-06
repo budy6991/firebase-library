@@ -1,7 +1,7 @@
 import React from "react";
 import { BookCard } from "./BookCard";
 
-export const DisplayBooks = ({ books, markAsRead }) => {
+export const DisplayBooks = ({ books, markAsRead, deleteBook }) => {
   const displayAll = books.map((book) => {
     return (
       <BookCard
@@ -12,11 +12,12 @@ export const DisplayBooks = ({ books, markAsRead }) => {
         id={book.id}
         key={book.id}
         markAsRead={markAsRead}
+        deleteBook={deleteBook}
       />
     );
   });
   return (
-    <div className="flex gap-10 flex-wrap mt-[200px] p-5 justify-center">
+    <div className="flex gap-10 flex-wrap mt-[200px] p-5 justify-center overflow-x-hidden">
       {displayAll}
     </div>
   );

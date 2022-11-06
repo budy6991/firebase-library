@@ -8,7 +8,7 @@ import { Overview } from "./components.js/Overview";
 
 function App() {
   return (
-    <div className="w-screen h-full bg-gray-200 flex flex-col justify-between">
+    <div className="w-screen h-screen bg-gray-200 flex flex-col justify-between ">
       <Header />
       <Overview />
       <Footer />

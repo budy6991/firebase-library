@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { flushSync } from "react-dom";
 
-export const BookCard = ({ name, author, pages, read, id, markAsRead }) => {
+export const BookCard = ({
+  name,
+  author,
+  pages,
+  read,
+  id,
+  markAsRead,
+  deleteBook,
+}) => {
   const [isRead, setIsRead] = useState(read);
 
   const handleToggleRead = () => {
@@ -30,7 +37,7 @@ export const BookCard = ({ name, author, pages, read, id, markAsRead }) => {
         </div>
         <div className="flex justify-evenly">
           <button onClick={handleToggleRead}>Read {isRead ? "✓" : ""}</button>
-          <button>remove</button>
+          <button onClick={() => deleteBook(id)}>Remove</button>
         </div>
       </div>
     </div>
