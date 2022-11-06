@@ -20,8 +20,8 @@ export const BookCard = ({
   }, [isRead]);
 
   return (
-    <div className="flex w-[240px] h-[250px] h-full bg-white text-black justify-start text-black p-4 rounded-r-xl shadow-lg transition-all hover:scale-105">
-      <div className="w-[16px] bg-zinc-500 h-full"></div>
+    <div className="flex w-[260px] h-[270px] h-full bg-white text-black justify-start text-black p-4 rounded-r-xl shadow-lg transition-all hover:scale-105">
+      <div className="w-5 bg-zinc-500 h-full"></div>
       <div className="flex flex-col justify-around  ml-[10px] w-full">
         <div>
           <h2>Name: {name}</h2>
